@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      {{ myName }}
+      {{ myName }}, {{newBook.bookName}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,12 +12,44 @@
     <ion-label>{{ element }}</ion-label>
   </ion-item>
 </ion-list>
-<ion-button (click)="btnClick()"> Добавить </ion-button> 
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Вветите текст</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+  <ion-list>
+  <ion-item>
+    <ion-input label="Название книги" [(ngModel)]="newBook.bookName"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input label="Авторы" [(ngModel)]="newBook.authorName"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input label="Год" [(ngModel)]="newBook.year"></ion-input>
+  </ion-item>
+  </ion-list>
+</ion-card-content>
+</ion-card>
+
+
+<ion-button  (click)="btnClick()"> Добавить </ion-button> 
 <ion-grid>
+
+  <ion-row>
+    <ion-col> ID </ion-col>
+    <ion-col> Название книги </ion-col>
+    <ion-col> Автор </ion-col>
+    <ion-col> Год </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
   <ion-row *ngFor="let element of books">
+  <ion-col>{{ element.uid}}</ion-col>
     <ion-col>{{ element.bookName }}</ion-col>
     <ion-col>{{ element.authorName }}</ion-col>
     <ion-col>{{ element.year }}</ion-col>
+    <ion-col><ion-button (click)="delClick(element.uid)">-</ion-button></ion-col>
   </ion-row>
 </ion-grid>
 </ion-content>
